@@ -158,7 +158,7 @@ result = params.render(prompt_template)
 ### Example 2: Content Generation Prompt
 
 ```yaml
-# yaml_params/params.yaml
+# modify yaml_params/params.yaml with:
 role: technical writer
 task: create tutorial
 topic: Docker containerization
@@ -190,25 +190,6 @@ Include:
 result = params.render(prompt)
 ```
 
-## Project Structure
-
-```
-ppts/
-├── ppts/                # Main package
-│   ├── __init__.py
-│   ├── core.py          # Parameter engine
-│   └── cli.py           # CLI
-├── examples/
-│   ├── yaml_params/     # YAML parameter files
-│   │   └── params.yaml  # Example AI prompt config
-│   ├── basic_usage.py
-│   ├── advanced_usage.py
-│   └── cli_examples.py
-├── README.md
-├── requirements.txt
-└── setup.py
-```
-
 ## API
 
 ### PPTS Class
@@ -236,43 +217,10 @@ all_params = params.list_params()
 params.save("yaml_params/params.yaml")
 ```
 
-## Best Practices
-
-1. **Semantic Names**: Use descriptive parameter names (e.g., `output_format` instead of `fmt`)
-2. **Separate Concerns**: Create different YAML files for different prompt types (analysis, generation, review)
-3. **Document Parameters**: Add comments explaining what each parameter controls
-4. **Version Control**: Track your YAML configurations with git
-5. **Reusable Sections**: Use lists for repeated structures (focus_areas, output_sections)
-6. **Default Values**: Set sensible defaults in your YAML for common use cases
-
-```yaml
-# yaml_params/code_review.yaml
-# AI Code Review Configuration
-# Last updated: 2026-02-23
-
-# Core Behavior
-role: senior software engineer
-task: comprehensive code review
-language: English
-
-# Output Configuration
-output_format: markdown
-detail_level: detailed
-
-# Analysis Focus
-focus_areas:
-  - Security
-  - Performance
-  - Maintainability
-```
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-
-MIT License - see LICENSE file for details
 
 ## Why PPTS?
 
@@ -283,10 +231,8 @@ MIT License - see LICENSE file for details
 - ✅ **No Complexity**: No predefined templates, no complex configuration
 - ✅ **Structured Approach**: Parametrized prompts with template structuring
 
-## License
-
-MIT License - Do whatever you want with this.
-
 ---
 
-**PPTS** ⚡ - Prompt Parametrized and Template Structurer
+ # Author
+
+[Eduardo J. Barrios](https://edujbarrios.com)

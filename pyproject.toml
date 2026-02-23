@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ppts"
+version = "1.0.0"
+description = "Prompt Parametrized and Template Structurer - Craft reusable prompts with YAML parameters"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Eduardo J. Barrios"}
+]
+keywords = ["prompt", "yaml", "template", "parameterization", "jinja2", "llm", "ai", "ppts"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Markup",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "jinja2>=3.1.0",
+    "click>=8.0.0",
+    "pyyaml>=6.0",
+    "colorama>=0.4.6",
+]
+
+[project.scripts]
+ppts = "ppts.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/ppts"
+Repository = "https://github.com/yourusername/ppts"
