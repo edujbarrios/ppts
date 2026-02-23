@@ -1,157 +1,155 @@
 """
-Basic usage examples of PPTS.
+Basic usage examples of PPTS for AI prompt parametrization.
 """
 
 from ppts import PPTS
 
 print("=" * 70)
-print("PPTS ⚡ - Usage Examples")
+print("PPTS ⚡ - AI Prompt Parametrization Examples")
 print("=" * 70)
 print()
 
-# Example 1: Create and use basic parameters
-print("Example 1: Basic Parameters")
+# Example 1: Simple AI Role Configuration
+print("Example 1: Basic AI Prompt")
 print("-" * 70)
 
-smith = PPTS({
-    'name': 'Alice',
-    'role': 'Developer',
-    'company': 'TechCorp'
+params = PPTS({
+    'role': 'helpful AI assistant',
+    'task': 'answer questions',
+    'language': 'English'
 })
 
-prompt = "Hello {{name}}! You work as a {{role}} at {{company}}."
-result = smith.render(prompt)
+prompt = """You are a {{role}}.
+Your task: {{task}}
+Language: {{language}}"""
+
+result = params.render(prompt)
 print(result)
 print()
 
 # Example 2: Load from YAML file
-print("Example 2: Load from YAML")
+print("Example 2: Load AI Config from YAML")
 print("-" * 70)
 
 try:
-    smith = PPTS.from_yaml("examples/yaml_params/params.yaml")
+    params = PPTS.from_yaml("examples/yaml_params/params.yaml")
     
-    prompt = """
-Dear {{name}},
+    prompt = """You are a {{role}}.
 
-Thank you for your interest in the {{role}} position.
-We received your application at {{email}}.
+Task: {{task}}
+Input: {{input_type}}
+Output: {{output_format}}
+Language: {{language}}
 
-Best regards,
-HR Team
-    """.strip()
+Focus areas:
+{% for area in focus_areas %}
+- {{area}}
+{% endfor %}"""
     
-    result = smith.render(prompt)
+    result = params.render(prompt)
     print(result)
     print()
 except FileNotFoundError:
     print("params.yaml file not found. Run from project root.")
     print()
 
-# Example 3: Add parameters dynamically
-print("Example 3: Add Parameters")
+# Example 3: Code Analysis Prompt
+print("Example 3: Code Analysis Configuration")
 print("-" * 70)
 
-smith = PPTS({'name': 'Bob'})
-print(f"Initial parameters: {smith.list_params()}")
-
-smith.add('email', 'bob@example.com')
-smith.add('city', 'New York')
-
-print(f"After adding: {smith.list_params()}")
-print()
-
-# Example 4: Prompts with lists
-print("Example 4: Using Lists")
-print("-" * 70)
-
-smith = PPTS({
-    'name': 'Carol',
-    'skills': ['Python', 'JavaScript', 'Docker', 'Kubernetes']
+params = PPTS({
+    'role': 'senior code reviewer',
+    'code_language': 'Python',
+    'analysis_depth': 'comprehensive',
+    'check_items': ['security', 'performance', 'best practices']
 })
 
-prompt = """
-Developer: {{name}}
+prompt = """You are a {{role}}.
 
-Technical Skills:
-{% for skill in skills %}
-- {{skill}}
-{% endfor %}
-""".strip()
+Analyze the following {{code_language}} code.
+Depth: {{analysis_depth}}
 
-result = smith.render(prompt)
+Check for:
+{% for item in check_items %}
+- {{item}}
+{% endfor %}"""
+
+result = params.render(prompt)
 print(result)
 print()
 
-# Example 5: Prompts with conditionals
-print("Example 5: Conditionals")
+# Example 4: Content Conditionals
+print("Example 4: Conditional Prompt Sections")
 print("-" * 70)
 
-smith = PPTS({
-    'name': 'David',
-    'experience_years': 8,
-    'language': 'Python'
+params = PPTS({
+    'role': 'technical writer',
+    'include_examples': True,
+    'include_diagrams': False,
+    'max_length': 1000
 })
 
-prompt = """
-Candidate: {{name}}
-Language: {{language}}
+prompt = """You are a {{role}}.
 
-{% if experience_years >= 5 %}
-✓ Senior level candidate with {{experience_years}} years of experience
-{% else %}
-✓ Junior/Mid level candidate with {{experience_years}} years of experience
+Write documentation with max {{max_length}} words.
+
+{% if include_examples %}
+Include code examples.
 {% endif %}
-""".strip()
+{% if include_diagrams %}
+Include diagrams.
+{% endif %}"""
 
-result = smith.render(prompt)
+result = params.render(prompt)
 print(result)
 print()
 
-# Example 6: Extra parameters in render
-print("Example 6: Extra Parameters")
+# Example 5: Add Parameters Dynamically
+print("Example 5: Dynamic Parameter Addition")
 print("-" * 70)
 
-smith = PPTS({'name': 'Elena'})
+params = PPTS({'role': 'data analyst'})
+print(f"Initial: {params.list_params()}")
 
-# YAML parameters + extra parameters
-result = smith.render(
-    "Hello {{name}} from {{city}}!",
-    city="Paris"  # Extra parameter
+params.add('output_format', 'JSON')
+params.add('max_results', 10)
+params.add('sort_by', 'relevance')
+
+print(f"After adding: {params.list_params()}")
+print()
+
+# Example 6: Override with Extra Parameters
+print("Example 6: Runtime Parameter Override")
+print("-" * 70)
+
+params = PPTS({
+    'role': 'translator',
+    'source_lang': 'English'
+})
+
+# Override target_lang at runtime
+result = params.render(
+    "You are a {{role}}. Translate from {{source_lang}} to {{target_lang}}.",
+    target_lang="Spanish"
 )
 print(result)
 print()
 
-# Example 7: Save parameters
-print("Example 7: Save to YAML")
+# Example 7: Save Configuration
+print("Example 7: Save AI Configuration")
 print("-" * 70)
 
-smith = PPTS({
-    'name': 'Frank',
-    'email': 'frank@example.com',
-    'role': 'Data Scientist',
-    'tools': ['Python', 'TensorFlow', 'PyTorch']
+params = PPTS({
+    'role': 'AI code generator',
+    'language': 'Python',
+    'style': 'object-oriented',
+    'include_tests': True,
+    'include_docs': True,
+    'frameworks': ['FastAPI', 'SQLAlchemy']
 })
 
-smith.save('yaml_params/my_params.yaml')
-print("✓ Parameters saved to yaml_params/my_params.yaml")
-print()
-
-# Example 8: Forge information
-print("Example 8: Information")
-print("-" * 70)
-
-smith = PPTS({
-    'param1': 'value1',
-    'param2': 'value2',
-    'param3': 'value3'
-})
-
-print(f"Representation: {repr(smith)}")
-print(f"String: {str(smith)}")
-print(f"Number of parameters: {len(smith)}")
-print(f"Contains 'param1'? {'param1' in smith}")
-print(f"Contains 'param99'? {'param99' in smith}")
+params.save('yaml_params/code_generator_config.yaml')
+print("✓ Configuration saved to yaml_params/code_generator_config.yaml")
 print()
 
 print("=" * 70)

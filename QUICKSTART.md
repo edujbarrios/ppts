@@ -18,27 +18,33 @@ pip install -e .
 
 1. **Create a parameters file:**
 ```bash
-python -m ppts init yaml_params/my_params.yaml
+python -m ppts init yaml_params/my_prompt.yaml
 ```
 
 2. **View your parameters:**
 ```bash
-python -m ppts show yaml_params/my_params.yaml
+python -m ppts show yaml_params/my_prompt.yaml
 ```
 
-3. **Create a prompt file** (e.g., `email.txt`):
+3. **Create a prompt template** (e.g., `ai_prompt.txt`):
 ```
-Hello {{name}},
+You are a {{role}}.
 
-This is {{sender_name}} from {{company}}.
+Task: {{task}}
+Input type: {{input_type}}
+Output format: {{output_format}}
 
-Best regards,
-{{sender_name}}
+Focus on:
+{% for area in focus_areas %}
+- {{area}}
+{% endfor %}
+
+Provide your analysis below.
 ```
 
 4. **Render it:**
 ```bash
-python -m ppts render email.txt yaml_params/my_params.yaml
+python -m ppts render ai_prompt.txt yaml_params/my_prompt.yaml
 ```
 
 ## Python Usage
@@ -47,7 +53,13 @@ python -m ppts render email.txt yaml_params/my_params.yaml
 from ppts import PPTS
 
 # Load parameters
-smith = PPTS.from_yaml("yaml_params/my_params.yaml")
+params = PPTS.from_yaml("yaml_params/my_prompt.yaml")
+
+# Use in your code
+prompt = "You are a {{role}}. Task: {{task}}"
+result = params.render(prompt)
+print(result)
+```
 
 # Use in your code
 prompt = "Hello {{name}}! You are a {{role}}."

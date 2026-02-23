@@ -1,28 +1,42 @@
-# PPTS Parameters - Personal
-# Edit this file to customize your parameters
+# PPTS Parameters - AI Prompt Configuration
+# Parametrize your prompts for LLM models
 
-# Basic Information
-name: Alice Johnson
-email: alice.johnson@example.com
-address: 123 Main Street, San Francisco, CA
-phone: +1-555-0123
+# AI Role & Persona
+role: expert Python developer and code reviewer
+expertise_areas:
+  - Python best practices
+  - Code optimization
+  - Security analysis
+  - Documentation
 
-# Professional Information
-role: Senior Python Developer
-company: TechCorp
-department: Engineering
-experience_years: 5
+# Task Configuration
+task: code review
+input_type: Python code
+output_format: markdown
+language: English
 
-# Technical Skills
-language: Python
-framework: Django
-specialties:
-  - Backend Development
-  - API Design
-  - Database Optimization
-  - Cloud Architecture
+# Behavior & Tone
+tone: professional and constructive
+detail_level: detailed
+include_examples: true
+max_suggestions: 5
 
-# Preferences
-timezone: PST
-availability: Full-time
-work_mode: Hybrid
+# Context & Constraints
+context: production-ready code review for a web API
+focus_areas:
+  - Performance
+  - Security
+  - Maintainability
+  - Error handling
+
+constraints:
+  - Follow PEP 8 style guide
+  - Suggest only actionable improvements
+  - Prioritize critical issues first
+
+# Output Structure
+output_sections:
+  - Summary
+  - Critical Issues
+  - Recommendations
+  - Positive Highlights
