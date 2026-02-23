@@ -1,0 +1,32 @@
+# ParamForge Parameters - Work Context
+# For professional/work-related prompts
+
+# Professional Profile
+name: Roberto Martínez
+email: roberto.martinez@company.com
+role: Tech Lead
+company: InnovateCo
+department: Product Development
+team: Platform Team
+manager: Sarah Chen
+
+# Project Information
+current_project: Cloud Migration
+project_status: In Progress
+sprint: Sprint 12
+deadline: 2026-03-31
+
+# Work Details
+work_location: Remote
+office_location: Austin, TX
+timezone: CST
+work_hours: 9 AM - 6 PM
+
+# Team Members
+teammates:
+  - name: Maria Garcia
+    role: Frontend Developer
+  - name: John Doe
+    role: Backend Developer
+  - name: Lisa Wang
+    role: DevOps Engineer

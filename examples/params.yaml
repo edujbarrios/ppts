@@ -1,0 +1,28 @@
+# ParamForge Parameters - Personal
+# Edit this file to customize your parameters
+
+# Basic Information
+name: Alice Johnson
+email: alice.johnson@example.com
+address: 123 Main Street, San Francisco, CA
+phone: +1-555-0123
+
+# Professional Information
+role: Senior Python Developer
+company: TechCorp
+department: Engineering
+experience_years: 5
+
+# Technical Skills
+language: Python
+framework: Django
+specialties:
+  - Backend Development
+  - API Design
+  - Database Optimization
+  - Cloud Architecture
+
+# Preferences
+timezone: PST
+availability: Full-time
+work_mode: Hybrid
