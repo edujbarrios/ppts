@@ -18,21 +18,6 @@ Structure your prompts with reusable parameters - you provide the YAML configura
 - 🛠️ **Intuitive CLI**: Simple command-line interface
 - 💾 **Multiple Contexts**: Create different YAML files for different projects or contexts
 
-## Project Structure
-
-```
-ppts/
-├── ppts/                  # Main package
-│   ├── __init__.py
-│   ├── core.py            # PPTS class & rendering engine
-│   ├── cli.py             # Command-line interface
-│   └── __main__.py        # Entry point
-├── yaml_params/           # Your YAML configuration files
-│   └── params.yaml        # Example AI prompt configuration
-├── README.md
-└── requirements.txt
-```
-
 ## Installation
 
 ```bash
@@ -108,27 +93,8 @@ Simply edit the YAML file to change the prompt behavior:
 
 ```yaml
 # yaml_params/params.yaml - Code Review Configuration
-role: senior code reviewer
-task: identify bugs and security issues
-input_type: JavaScript code
-output_format: structured JSON
-language: Spanish
-tone: constructive and educational
-focus_areas:
-  - Security vulnerabilities
-  - Memory leaks
-  - Error handling
-  - Code duplication
-
-# Or for Content Creation
-role: creative content writer
-task: generate blog post ideas
-output_format: bullet points
-language: English
-tone: engaging and casual
-topic: artificial intelligence
-target_audience: tech enthusiasts
-max_ideas: 10
+example: Hello world
+role: ...
 ```
 
 ### Using the CLI
