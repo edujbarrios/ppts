@@ -1,11 +1,11 @@
 """
-Advanced examples of PromptSmith for real use cases.
+Advanced examples of PPTS for real use cases.
 """
 
-from promptsmith import PromptSmith
+from ppts import PPTS
 
 print("=" * 70)
-print("PromptSmith ⚡ - Advanced Examples")
+print("PPTS ⚡ - Advanced Examples")
 print("=" * 70)
 print()
 
@@ -13,7 +13,7 @@ print()
 print("Example 1: Professional Email Generator")
 print("-" * 70)
 
-email_params = PromptSmith({
+email_params = PPTS({
     'sender_name': 'María García',
     'sender_role': 'Product Manager',
     'sender_email': 'maria@techstart.com',
@@ -50,7 +50,7 @@ print("\n")
 print("Example 2: Professional Profile Generator")
 print("-" * 70)
 
-profile_params = PromptSmith({
+profile_params = PPTS({
     'name': 'Alex Johnson',
     'title': 'Full Stack Developer',
     'experience_years': 7,
@@ -83,7 +83,7 @@ print("\n")
 print("Example 3: Project Status Report")
 print("-" * 70)
 
-project_params = PromptSmith({
+project_params = PPTS({
     'project': 'E-Commerce Platform',
     'sprint': 'Sprint 12',
     'manager': 'Sarah Chen',
@@ -143,7 +143,7 @@ print("\n")
 print("Example 4: Code Review Request")
 print("-" * 70)
 
-review_params = PromptSmith({
+review_params = PPTS({
     'developer': 'Carlos Ruiz',
     'reviewer': 'Tech Lead',
     'feature': 'User Authentication',
@@ -180,7 +180,7 @@ print("\n")
 print("Example 5: Data Analysis Template")
 print("-" * 70)
 
-analysis_params = PromptSmith({
+analysis_params = PPTS({
     'analyst': 'Dr. Lisa Wang',
     'dataset': 'Customer Behavior Q1 2026',
     'records': 150000,
@@ -225,10 +225,10 @@ print("-" * 70)
 
 try:
     # Load personal parameters
-    personal = PromptSmith.from_yaml("examples/params.yaml")
+    personal = PPTS.from_yaml("examples/yaml_params/params.yaml")
     
     # Merge with work parameters
-    personal.merge_yaml("examples/work_params.yaml")
+    personal.merge_yaml("examples/yaml_params/work_params.yaml")
     
     combined_template = """
 Professional Profile

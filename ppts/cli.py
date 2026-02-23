@@ -1,5 +1,5 @@
 """
-Command-line interface for PromptSmith.
+Command-line interface for PPTS (Prompt Parametrized and Template Structurer).
 """
 
 import sys
@@ -9,7 +9,7 @@ import click
 from colorama import init, Fore, Style
 import yaml
 
-from .core import PromptSmith
+from .core import PPTS
 
 # Initialize colorama
 init(autoreset=True)
@@ -19,7 +19,7 @@ init(autoreset=True)
 @click.version_option(version="1.0.0")
 def cli():
     """
-    PromptSmith ⚡ - Craft your prompts with editable YAML files.
+    PPTS ⚡ - Prompt Parametrized and Template Structurer
     
     Create, edit and use YAML parameters in your prompts simply.
     """
@@ -37,7 +37,7 @@ def init(filepath, name, email, role, company):
     Create a new YAML parameters file.
     
     Example:
-        promptsmith init my_params.yaml
+        ppts init my_params.yaml
     """
     params = {
         'name': name,
@@ -49,7 +49,7 @@ def init(filepath, name, email, role, company):
     if company:
         params['company'] = company
     
-    smith = PromptSmith(params)
+    smith = PPTS(params)
     smith.save(filepath)
     
     click.echo(f"{Fore.GREEN}✓ Parameters file created: {filepath}")
@@ -63,10 +63,10 @@ def show(params_file):
     Show all parameters from a YAML file.
     
     Example:
-        promptsmith show params.yaml
+        ppts show params.yaml
     """
     try:
-        smith = PromptSmith.from_yaml(params_file)
+        smith = PPTS.from_yaml(params_file)
         params = smith.list_params()
         
         click.echo(f"{Fore.CYAN}📄 Parameters in {params_file}:")
@@ -110,13 +110,13 @@ def render(prompt_file, params_file, output, param):
     Render a prompt using YAML parameters.
     
     Examples:
-        promptsmith render my_prompt.txt params.yaml
-        promptsmith render my_prompt.txt params.yaml -o output.txt
-        promptsmith render my_prompt.txt params.yaml -p extra_key=value
+        ppts render my_prompt.txt params.yaml
+        ppts render my_prompt.txt params.yaml -o output.txt
+        ppts render my_prompt.txt params.yaml -p extra_key=value
     """
     try:
         # Load parameters
-        smith = PromptSmith.from_yaml(params_file)
+        smith = PPTS.from_yaml(params_file)
         
         # Add extra inline parameters
         extra_params = {}
@@ -152,10 +152,10 @@ def add(params_file, key, value):
     Add or update a parameter in the YAML file.
     
     Example:
-        promptsmith add params.yaml --key department --value Engineering
+        ppts add params.yaml --key department --value Engineering
     """
     try:
-        forge = PromptForge.from_yaml(params_file)
+        smith = PPTS.from_yaml(params_file)
         
         # Try to parse value as JSON for complex types
         try:
@@ -181,10 +181,10 @@ def remove(params_file, key):
     Remove a parameter from the YAML file.
     
     Example:
-        promptsmith remove params.yaml old_param
+        ppts remove params.yaml old_param
     """
     try:
-        smith = PromptSmith.from_yaml(params_file)
+        smith = PPTS.from_yaml(params_file)
         
         if key not in smith:
             click.echo(f"{Fore.YELLOW}⚠ Parameter '{key}' does not exist")
@@ -208,10 +208,10 @@ def get(params_file, key):
     Get the value of a specific parameter.
     
     Example:
-        promptsmith get params.yaml name
+        ppts get params.yaml name
     """
     try:
-        smith = PromptSmith.from_yaml(params_file)
+        smith = PPTS.from_yaml(params_file)
         value = smith.get(key)
         
         if value is None:
@@ -232,10 +232,10 @@ def merge(target_file, source_file):
     Merge parameters from two YAML files.
     
     Example:
-        promptsmith merge params.yaml additional_params.yaml
+        ppts merge params.yaml additional_params.yaml
     """
     try:
-        smith = PromptSmith.from_yaml(target_file)
+        smith = PPTS.from_yaml(target_file)
         initial_count = len(smith)
         
         smith.merge_yaml(source_file)

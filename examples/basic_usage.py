@@ -1,11 +1,11 @@
 """
-Basic usage examples of PromptSmith.
+Basic usage examples of PPTS.
 """
 
-from promptsmith import PromptSmith
+from ppts import PPTS
 
 print("=" * 70)
-print("PromptSmith ⚡ - Usage Examples")
+print("PPTS ⚡ - Usage Examples")
 print("=" * 70)
 print()
 
@@ -13,7 +13,7 @@ print()
 print("Example 1: Basic Parameters")
 print("-" * 70)
 
-smith = PromptSmith({
+smith = PPTS({
     'name': 'Alice',
     'role': 'Developer',
     'company': 'TechCorp'
@@ -29,7 +29,7 @@ print("Example 2: Load from YAML")
 print("-" * 70)
 
 try:
-    forge = ParamForge.from_yaml("examples/params.yaml")
+    smith = PPTS.from_yaml("examples/yaml_params/params.yaml")
     
     prompt = """
 Dear {{name}},
@@ -52,7 +52,7 @@ except FileNotFoundError:
 print("Example 3: Add Parameters")
 print("-" * 70)
 
-smith = PromptSmith({'name': 'Bob'})
+smith = PPTS({'name': 'Bob'})
 print(f"Initial parameters: {smith.list_params()}")
 
 smith.add('email', 'bob@example.com')
@@ -65,7 +65,7 @@ print()
 print("Example 4: Using Lists")
 print("-" * 70)
 
-smith = PromptSmith({
+smith = PPTS({
     'name': 'Carol',
     'skills': ['Python', 'JavaScript', 'Docker', 'Kubernetes']
 })
@@ -79,7 +79,7 @@ Technical Skills:
 {% endfor %}
 """.strip()
 
-result = forge.render(prompt)
+result = smith.render(prompt)
 print(result)
 print()
 
@@ -87,7 +87,7 @@ print()
 print("Example 5: Conditionals")
 print("-" * 70)
 
-smith = PromptSmith({
+smith = PPTS({
     'name': 'David',
     'experience_years': 8,
     'language': 'Python'
@@ -104,7 +104,7 @@ Language: {{language}}
 {% endif %}
 """.strip()
 
-result = forge.render(prompt)
+result = smith.render(prompt)
 print(result)
 print()
 
@@ -112,7 +112,7 @@ print()
 print("Example 6: Extra Parameters")
 print("-" * 70)
 
-smith = PromptSmith({'name': 'Elena'})
+smith = PPTS({'name': 'Elena'})
 
 # YAML parameters + extra parameters
 result = smith.render(
@@ -126,22 +126,22 @@ print()
 print("Example 7: Save to YAML")
 print("-" * 70)
 
-smith = PromptSmith({
+smith = PPTS({
     'name': 'Frank',
     'email': 'frank@example.com',
     'role': 'Data Scientist',
     'tools': ['Python', 'TensorFlow', 'PyTorch']
 })
 
-smith.save('my_params.yaml')
-print("✓ Parameters saved to my_params.yaml")
+smith.save('yaml_params/my_params.yaml')
+print("✓ Parameters saved to yaml_params/my_params.yaml")
 print()
 
 # Example 8: Forge information
 print("Example 8: Information")
 print("-" * 70)
 
-smith = PromptSmith({
+smith = PPTS({
     'param1': 'value1',
     'param2': 'value2',
     'param3': 'value3'

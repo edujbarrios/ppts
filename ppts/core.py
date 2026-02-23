@@ -1,5 +1,6 @@
 """
-Core engine for PromptSmith - Simple YAML-based parameter management for prompts.
+Core engine for PPTS - Prompt Parametrized and Template Structurer
+Simple YAML-based parameter management for prompts.
 """
 
 import os
@@ -9,7 +10,7 @@ from jinja2 import Environment, Template, exceptions
 import yaml
 
 
-class PromptSmith:
+class PPTS:
     """
     Manage parameters from YAML files and render prompts with them.
     
@@ -18,7 +19,7 @@ class PromptSmith:
     
     def __init__(self, params: Optional[Dict[str, Any]] = None):
         """
-        Initialize PromptForge with parameters.
+        Initialize PPTS with parameters.
         
         Args:
             params: Dictionary of parameters (default: empty dict)
@@ -31,7 +32,7 @@ class PromptSmith:
         )
     
     @classmethod
-    def from_yaml(cls, filepath: str) -> 'PromptForge':
+    def from_yaml(cls, filepath: str) -> 'PPTS':
         """
         Load parameters from a YAML file.
         
@@ -39,17 +40,17 @@ class PromptSmith:
             filepath: Path to YAML file
             
         Returns:
-            PromptSmith instance with loaded parameters
+            PPTS instance with loaded parameters
             
         Example:
-            smith = PromptSmith.from_yaml("params.yaml")
+            smith = PPTS.from_yaml("params.yaml")
         """
         with open(filepath, 'r', encoding='utf-8') as f:
             params = yaml.safe_load(f) or {}
         return cls(params)
     
     @classmethod
-    def create_default(cls, filepath: str) -> 'PromptForge':
+    def create_default(cls, filepath: str) -> 'PPTS':
         """
         Create a default YAML parameter file with common fields.
         
@@ -57,10 +58,10 @@ class PromptSmith:
             filepath: Path where to create the YAML file
             
         Returns:
-            PromptSmith instance
+            PPTS instance
             
         Example:
-            smith = PromptSmith.create_default("my_params.yaml")
+            smith = PPTS.create_default("my_params.yaml")
         """
         default_params = {
             'name': 'Your Name',
@@ -72,7 +73,7 @@ class PromptSmith:
         
         # Save to file
         with open(filepath, 'w', encoding='utf-8') as f:
-            f.write("# PromptSmith Parameters\n")
+            f.write("# PPTS Parameters\n")
             f.write(f"# Created: {filepath}\n")
             f.write("# Edit this file to add your own parameters\n\n")
             yaml.dump(default_params, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
@@ -187,7 +188,7 @@ class PromptSmith:
         """
         with open(filepath, 'w', encoding='utf-8') as f:
             if include_comments:
-                f.write("# PromptSmith Parameters\n")
+                f.write("# PPTS Parameters\n")
                 f.write(f"# File: {filepath}\n\n")
             yaml.dump(self.params, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
     
@@ -215,9 +216,9 @@ class PromptSmith:
     
     def __repr__(self) -> str:
         """String representation."""
-        return f"PromptSmith(parameters={len(self.params)})"
+        return f"PPTS(parameters={len(self.params)})"
     
     def __str__(self) -> str:
         """User-friendly string representation."""
         param_list = ", ".join(self.params.keys())
-        return f"PromptSmith with {len(self.params)} parameters: {param_list}"
+        return f"PPTS with {len(self.params)} parameters: {param_list}"

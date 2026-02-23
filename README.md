@@ -1,12 +1,14 @@
-# PromptSmith ⚡
+# PPTS ⚡
+
+**Prompt Parametrizer and Template Structurer**
 
 Craft reusable prompts with simple YAML parameters.
 
-## What is PromptSmith?
+## What is PPTS?
 
-PromptSmith is a minimalist tool that lets you define variables in YAML files and use them in any prompt. No predefined templates, no unnecessary complexity. Just your parameters, your prompts.
+PPTS (Prompt Parametrizer and Template Structurer) is a minimalist tool that lets you define variables in YAML files and use them in any prompt. No predefined templates, no unnecessary complexity. Just your parameters, your prompts.
 
-Think of it as a **forge for your prompts** - you provide the raw materials (YAML parameters), and PromptSmith helps you craft the final product (rendered prompts).
+Structure your prompts with reusable parameters - you provide the YAML configuration, and PPTS helps you generate consistent, customizable prompts.
 
 ## Features
 
@@ -27,7 +29,7 @@ pip install -r requirements.txt
 ### 1. Create your YAML parameters file
 
 ```yaml
-# params.yaml
+# yaml_params/params.yaml
 name: Alice
 role: Senior Developer
 company: TechCorp
@@ -39,10 +41,10 @@ experience_years: 5
 ### 2. Use the parameters in your prompt
 
 ```python
-from promptsmith import PromptSmith
+from ppts import PPTS
 
 # Load parameters
-smith = PromptSmith.from_yaml("params.yaml")
+smith = PPTS.from_yaml("yaml_params/params.yaml")
 
 # Create a prompt using the parameters
 prompt = """
@@ -62,7 +64,7 @@ print(result)
 Simply edit the YAML file:
 
 ```yaml
-# params.yaml - Add more parameters whenever you want!
+# yaml_params/params.yaml - Add more parameters whenever you want!
 name: Bob
 address: "456 Oak Avenue"
 role: Tech Lead
@@ -86,16 +88,16 @@ skills:
 
 ```bash
 # Render a prompt with YAML parameters
-python -m promptsmith render my_prompt.txt params.yaml
+python -m ppts render my_prompt.txt yaml_params/params.yaml
 
 # View available parameters
-python -m promptsmith show params.yaml
+python -m ppts show yaml_params/params.yaml
 
 # Add new parameters
-python -m promptsmith add params.yaml -k department -v Engineering
+python -m ppts add yaml_params/params.yaml -k department -v Engineering
 
 # Create a new parameters file
-python -m promptsmith init my_params.yaml
+python -m ppts init yaml_params/my_params.yaml
 ```
 
 ## Usage Examples
@@ -103,7 +105,7 @@ python -m promptsmith init my_params.yaml
 ### Example 1: Professional Email
 
 ```yaml
-# params.yaml
+# yaml_params/params.yaml
 name: María García
 role: Product Manager
 company: TechStart
@@ -127,7 +129,7 @@ Best regards,
 ### Example 2: Professional Profile
 
 ```yaml
-# profile_params.yaml
+# yaml_params/profile_params.yaml
 name: Alex Johnson
 profession: Full Stack Developer
 years: 7
@@ -141,14 +143,19 @@ specialties:
 ## Project Structure
 
 ```
-promptsmith/
-├── promptsmith/          # Main package
+ppts/
+├── ppts/                # Main package
 │   ├── __init__.py
 │   ├── core.py          # Parameter engine
 │   └── cli.py           # CLI
 ├── examples/
-│   ├── *.yaml           # Parameter examples
-│   └── *.py             # Code examples
+│   ├── yaml_params/     # YAML parameter files
+│   │   ├── params.yaml
+│   │   ├── work_params.yaml
+│   │   └── project_params.yaml
+│   ├── basic_usage.py
+│   ├── advanced_usage.py
+│   └── cli_examples.py
 ├── README.md
 ├── requirements.txt
 └── setup.py
@@ -156,13 +163,13 @@ promptsmith/
 
 ## API
 
-### PromptSmith Class
+### PPTS Class
 
 ```python
-from promptsmith import PromptSmith
+from ppts import PPTS
 
 # Create from YAML
-smith = PromptSmith.from_yaml("params.yaml")
+smith = PPTS.from_yaml("yaml_params/params.yaml")
 
 # Render prompt
 result = smith.render("Hello {{name}}!")
@@ -177,7 +184,7 @@ value = smith.get("name")
 params = smith.list_params()
 
 # Save changes
-smith.save("params.yaml")
+smith.save("yaml_params/params.yaml")
 ```
 
 ## Best Practices
@@ -189,7 +196,7 @@ smith.save("params.yaml")
 5. **Backup**: Make backups of your important parameters
 
 ```yaml
-# params.yaml - Personal Information
+# yaml_params/params.yaml - Personal Information
 # Last updated: 2026-02-23
 
 # Basic Info
@@ -209,14 +216,14 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 MIT License - see LICENSE file for details
 
-## Why PromptSmith?
+## Why PPTS?
 
 - ✅ **Minimalist**: Just YAML and your prompts
 - ✅ **Flexible**: Define the parameters you need
 - ✅ **Reusable**: One YAML, multiple prompts
 - ✅ **Portable**: Share YAML files easily
 - ✅ **No Complexity**: No predefined templates, no complex configuration
-- ✅ **Artisan Approach**: Craft your prompts with precision
+- ✅ **Structured Approach**: Parametrized prompts with template structuring
 
 ## License
 
@@ -224,4 +231,4 @@ MIT License - Do whatever you want with this.
 
 ---
 
-**PromptSmith** ⚡ - Forging better prompts through simplicity.
+**PPTS** ⚡ - Prompt Parametrized and Template Structurer

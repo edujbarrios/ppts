@@ -7,13 +7,13 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="promptsmith",
+    name="ppts",
     version="1.0.0",
     author="Eduardo J. Barrios",
-    description="Craft reusable prompts with simple YAML parameters",
+    description="Prompt Parametrized and Template Structurer - Craft reusable prompts with YAML parameters",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/promptsmith",
+    url="https://github.com/yourusername/ppts",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -32,9 +32,9 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "promptsmith=promptsmith.cli:main",
+            "ppts=ppts.cli:main",
         ],
     },
     include_package_data=True,
-    keywords="prompt yaml template parameterization jinja2 llm ai",
+    keywords="prompt yaml template parameterization jinja2 llm ai ppts",
 )

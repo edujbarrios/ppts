@@ -5,7 +5,7 @@
 ```bash
 # Clone the repository
 git clone <your-repo-url>
-cd promptsmith
+cd ppts
 
 # Install dependencies
 pip install -r requirements.txt
@@ -18,12 +18,12 @@ pip install -e .
 
 1. **Create a parameters file:**
 ```bash
-python -m promptsmith init my_params.yaml
+python -m ppts init yaml_params/my_params.yaml
 ```
 
 2. **View your parameters:**
 ```bash
-python -m promptsmith show my_params.yaml
+python -m ppts show yaml_params/my_params.yaml
 ```
 
 3. **Create a prompt file** (e.g., `email.txt`):
@@ -38,16 +38,16 @@ Best regards,
 
 4. **Render it:**
 ```bash
-python -m promptsmith render email.txt my_params.yaml
+python -m ppts render email.txt yaml_params/my_params.yaml
 ```
 
 ## Python Usage
 
 ```python
-from promptsmith import PromptSmith
+from ppts import PPTS
 
 # Load parameters
-smith = PromptSmith.from_yaml("my_params.yaml")
+smith = PPTS.from_yaml("yaml_params/my_params.yaml")
 
 # Use in your code
 prompt = "Hello {{name}}! You are a {{role}}."
