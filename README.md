@@ -1,28 +1,30 @@
-# ParamForge ⚡
+# PromptSmith ⚡
 
-Transforma tus prompts en plantillas reutilizables con YAML simple.
+Craft reusable prompts with simple YAML parameters.
 
-## ¿Qué es ParamForge?
+## What is PromptSmith?
 
-ParamForge es una herramienta minimalista que te permite definir variables en archivos YAML y usarlas en cualquier prompt. Sin plantillas predefinidas, sin complejidad innecesaria. Solo tus parámetros, tus prompts.
+PromptSmith is a minimalist tool that lets you define variables in YAML files and use them in any prompt. No predefined templates, no unnecessary complexity. Just your parameters, your prompts.
 
-## Características
+Think of it as a **forge for your prompts** - you provide the raw materials (YAML parameters), and PromptSmith helps you craft the final product (rendered prompts).
 
-- 📝 **YAML Simple**: Define parámetros en archivos YAML fáciles de editar
-- 🔄 **Totalmente Personalizable**: Agrega, modifica o elimina parámetros según necesites
-- 🎯 **Reutilizable**: Usa los mismos parámetros en múltiples prompts
-- 🛠️ **CLI Intuitivo**: Interfaz de línea de comandos simple
-- 💾 **Múltiples Contextos**: Crea diferentes archivos YAML para diferentes proyectos o contextos
+## Features
 
-## Instalación
+- 📝 **Simple YAML**: Define parameters in easy-to-edit YAML files
+- 🔄 **Fully Customizable**: Add, modify or remove parameters as you need
+- 🎯 **Reusable**: Use the same parameters in multiple prompts
+- 🛠️ **Intuitive CLI**: Simple command-line interface
+- 💾 **Multiple Contexts**: Create different YAML files for different projects or contexts
+
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Inicio Rápido
+## Quick Start
 
-### 1. Crea tu archivo de parámetros YAML
+### 1. Create your YAML parameters file
 
 ```yaml
 # params.yaml
@@ -34,15 +36,15 @@ language: Python
 experience_years: 5
 ```
 
-### 2. Usa los parámetros en tu prompt
+### 2. Use the parameters in your prompt
 
 ```python
-from paramforge import ParamForge
+from promptsmith import PromptSmith
 
-# Cargar parámetros
-forge = ParamForge.from_yaml("params.yaml")
+# Load parameters
+smith = PromptSmith.from_yaml("params.yaml")
 
-# Crear un prompt usando los parámetros
+# Create a prompt using the parameters
 prompt = """
 Hello {{name}}!
 You work as a {{role}} at {{company}}.
@@ -50,17 +52,17 @@ Contact: {{email}}
 You have {{experience_years}} years of experience in {{language}}.
 """
 
-# Renderizar
-result = forge.render(prompt)
+# Render
+result = smith.render(prompt)
 print(result)
 ```
 
-### 3. Editar parámetros
+### 3. Edit parameters
 
-Simplemente edita el archivo YAML:
+Simply edit the YAML file:
 
 ```yaml
-# params.yaml - ¡Agrega más parámetros cuando quieras!
+# params.yaml - Add more parameters whenever you want!
 name: Bob
 address: "456 Oak Avenue"
 role: Tech Lead
@@ -70,7 +72,7 @@ phone: "+1-555-9876"
 language: JavaScript
 experience_years: 8
 
-# Nuevos parámetros personalizados
+# New custom parameters
 project: AI Platform
 timezone: EST
 availability: Full-time
@@ -80,25 +82,25 @@ skills:
   - Docker
 ```
 
-### Usando el CLI
+### Using the CLI
 
 ```bash
-# Renderizar un prompt con parámetros YAML
-python -m paramforge render my_prompt.txt params.yaml
+# Render a prompt with YAML parameters
+python -m promptsmith render my_prompt.txt params.yaml
 
-# Ver parámetros disponibles
-python -m paramforge show params.yaml
+# View available parameters
+python -m promptsmith show params.yaml
 
-# Agregar nuevos parámetros
-python -m paramforge add params.yaml -k department -v Engineering
+# Add new parameters
+python -m promptsmith add params.yaml -k department -v Engineering
 
-# Crear un nuevo archivo de parámetros
-python -m paramforge init my_params.yaml
+# Create a new parameters file
+python -m promptsmith init my_params.yaml
 ```
 
-## Ejemplos de Uso
+## Usage Examples
 
-### Ejemplo 1: Email Profesional
+### Example 1: Professional Email
 
 ```yaml
 # params.yaml
@@ -122,7 +124,7 @@ Best regards,
 {{email}}
 ```
 
-### Ejemplo 2: Perfil Profesional
+### Example 2: Professional Profile
 
 ```yaml
 # profile_params.yaml
@@ -136,17 +138,17 @@ specialties:
   - AWS
 ```
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
-paramforge/
-├── paramforge/           # Paquete principal
+promptsmith/
+├── promptsmith/          # Main package
 │   ├── __init__.py
-│   ├── core.py          # Motor de parámetros
+│   ├── core.py          # Parameter engine
 │   └── cli.py           # CLI
 ├── examples/
-│   ├── *.yaml           # Ejemplos de parámetros
-│   └── *.py             # Ejemplos de código
+│   ├── *.yaml           # Parameter examples
+│   └── *.py             # Code examples
 ├── README.md
 ├── requirements.txt
 └── setup.py
@@ -154,37 +156,37 @@ paramforge/
 
 ## API
 
-### ParamForge Class
+### PromptSmith Class
 
 ```python
-from paramforge import ParamForge
+from promptsmith import PromptSmith
 
-# Crear desde YAML
-forge = ParamForge.from_yaml("params.yaml")
+# Create from YAML
+smith = PromptSmith.from_yaml("params.yaml")
 
-# Renderizar prompt
-result = forge.render("Hello {{name}}!")
+# Render prompt
+result = smith.render("Hello {{name}}!")
 
-# Agregar parámetro
-forge.add("new_key", "new_value")
+# Add parameter
+smith.add("new_key", "new_value")
 
-# Obtener parámetro
-value = forge.get("name")
+# Get parameter
+value = smith.get("name")
 
-# Listar todos los parámetros
-params = forge.list_params()
+# List all parameters
+params = smith.list_params()
 
-# Guardar cambios
-forge.save("params.yaml")
+# Save changes
+smith.save("params.yaml")
 ```
 
-## Mejores Prácticas
+## Best Practices
 
-1. **Nombres Descriptivos**: Usa nombres claros para tus parámetros (ej: `user_email` en lugar de `e`)
-2. **Organización**: Crea múltiples archivos YAML para diferentes contextos (trabajo, personal, proyectos)
-3. **Comentarios**: Documenta tus archivos YAML con comentarios
-4. **Versionado**: Mantén tus archivos YAML en control de versiones
-5. **Backup**: Haz copias de seguridad de tus parámetros importantes
+1. **Descriptive Names**: Use clear names for your parameters (e.g., `user_email` instead of `e`)
+2. **Organization**: Create multiple YAML files for different contexts (work, personal, projects)
+3. **Comments**: Document your YAML files with comments
+4. **Version Control**: Keep your YAML files in version control
+5. **Backup**: Make backups of your important parameters
 
 ```yaml
 # params.yaml - Personal Information
@@ -207,18 +209,19 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 MIT License - see LICENSE file for details
 
-## ¿Por qué ParamForge?
+## Why PromptSmith?
 
-- ✅ **Minimalista**: Solo YAML y tus prompts
-- ✅ **Flexible**: Define los parámetros que necesites
-- ✅ **Reutilizable**: Un YAML, múltiples prompts
-- ✅ **Portable**: Comparte archivos YAML fácilmente
-- ✅ **Sin Complejidad**: Sin plantillas predefinidas, sin configuración compleja
+- ✅ **Minimalist**: Just YAML and your prompts
+- ✅ **Flexible**: Define the parameters you need
+- ✅ **Reusable**: One YAML, multiple prompts
+- ✅ **Portable**: Share YAML files easily
+- ✅ **No Complexity**: No predefined templates, no complex configuration
+- ✅ **Artisan Approach**: Craft your prompts with precision
 
-## Licencia
+## License
 
-MIT License - Haz lo que quieras con esto.
+MIT License - Do whatever you want with this.
 
 ---
 
-**ParamForge** - Hecho con ⚡ para workflows de prompt engineering simples y poderosos.
+**PromptSmith** ⚡ - Forging better prompts through simplicity.

@@ -1,5 +1,5 @@
 """
-Command-line interface for ParamForge.
+Command-line interface for PromptSmith.
 """
 
 import sys
@@ -9,7 +9,7 @@ import click
 from colorama import init, Fore, Style
 import yaml
 
-from .core import ParamForge
+from .core import PromptSmith
 
 # Initialize colorama
 init(autoreset=True)
@@ -19,9 +19,9 @@ init(autoreset=True)
 @click.version_option(version="1.0.0")
 def cli():
     """
-    ParamForge ⚡ - Parametriza prompts con archivos YAML editables.
+    PromptSmith ⚡ - Craft your prompts with editable YAML files.
     
-    Crea, edita y usa parámetros YAML en tus prompts de forma simple.
+    Create, edit and use YAML parameters in your prompts simply.
     """
     pass
 
@@ -34,10 +34,10 @@ def cli():
 @click.option('--company', prompt='Your company', default='', help='Your company')
 def init(filepath, name, email, role, company):
     """
-    Crear un nuevo archivo de parámetros YAML.
+    Create a new YAML parameters file.
     
-    Ejemplo:
-        prompt-forge init my_params.yaml
+    Example:
+        promptsmith init my_params.yaml
     """
     params = {
         'name': name,
@@ -49,31 +49,31 @@ def init(filepath, name, email, role, company):
     if company:
         params['company'] = company
     
-    forge = ParamForge(params)
-    forge.save(filepath)
+    smith = PromptSmith(params)
+    smith.save(filepath)
     
-    click.echo(f"{Fore.GREEN}✓ Archivo de parámetros creado: {filepath}")
-    click.echo(f"{Fore.CYAN}Puedes editarlo manualmente para agregar más parámetros.")
+    click.echo(f"{Fore.GREEN}✓ Parameters file created: {filepath}")
+    click.echo(f"{Fore.CYAN}You can edit it manually to add more parameters.")
 
 
 @cli.command()
 @click.argument('params_file', type=click.Path(exists=True))
 def show(params_file):
     """
-    Mostrar todos los parámetros de un archivo YAML.
+    Show all parameters from a YAML file.
     
-    Ejemplo:
-        prompt-forge show params.yaml
+    Example:
+        promptsmith show params.yaml
     """
     try:
-        forge = ParamForge.from_yaml(params_file)
-        params = forge.list_params()
+        smith = PromptSmith.from_yaml(params_file)
+        params = smith.list_params()
         
-        click.echo(f"{Fore.CYAN}📄 Parámetros en {params_file}:")
+        click.echo(f"{Fore.CYAN}📄 Parameters in {params_file}:")
         click.echo()
         
         if not params:
-            click.echo(f"{Fore.YELLOW}  (vacío)")
+            click.echo(f"{Fore.YELLOW}  (empty)")
             return
         
         # Find max key length for alignment
@@ -93,7 +93,7 @@ def show(params_file):
             click.echo(f"  {Fore.YELLOW}{key:<{max_len}} {Fore.WHITE}→ {Style.DIM}{value_str}")
         
         click.echo()
-        click.echo(f"{Fore.GREEN}Total: {len(params)} parámetros")
+        click.echo(f"{Fore.GREEN}Total: {len(params)} parameters")
         
     except Exception as e:
         click.echo(f"{Fore.RED}Error: {str(e)}", err=True)
@@ -107,34 +107,34 @@ def show(params_file):
 @click.option('--param', '-p', multiple=True, help='Parámetro adicional: key=value')
 def render(prompt_file, params_file, output, param):
     """
-    Renderizar un prompt usando parámetros YAML.
+    Render a prompt using YAML parameters.
     
-    Ejemplos:
-        prompt-forge render my_prompt.txt params.yaml
-        prompt-forge render my_prompt.txt params.yaml -o output.txt
-        prompt-forge render my_prompt.txt params.yaml -p extra_key=value
+    Examples:
+        promptsmith render my_prompt.txt params.yaml
+        promptsmith render my_prompt.txt params.yaml -o output.txt
+        promptsmith render my_prompt.txt params.yaml -p extra_key=value
     """
     try:
         # Load parameters
-        forge = ParamForge.from_yaml(params_file)
+        smith = PromptSmith.from_yaml(params_file)
         
         # Add extra inline parameters
         extra_params = {}
         for p in param:
             if '=' not in p:
-                click.echo(f"{Fore.RED}Error: Parámetro debe ser key=value: {p}", err=True)
+                click.echo(f"{Fore.RED}Error: Parameter must be key=value format: {p}", err=True)
                 sys.exit(1)
             key, value = p.split('=', 1)
             extra_params[key] = value
         
         # Render
-        result = forge.render_file(prompt_file, **extra_params)
+        result = smith.render_file(prompt_file, **extra_params)
         
         # Output
         if output:
             with open(output, 'w', encoding='utf-8') as f:
                 f.write(result)
-            click.echo(f"{Fore.GREEN}✓ Resultado guardado en: {output}")
+            click.echo(f"{Fore.GREEN}✓ Output saved to: {output}")
         else:
             click.echo(result)
             
@@ -149,10 +149,10 @@ def render(prompt_file, params_file, output, param):
 @click.option('--value', '-v', required=True, help='Valor del parámetro')
 def add(params_file, key, value):
     """
-    Agregar o actualizar un parámetro en el archivo YAML.
+    Add or update a parameter in the YAML file.
     
-    Ejemplo:
-        prompt-forge add params.yaml --key department --value Engineering
+    Example:
+        promptsmith add params.yaml --key department --value Engineering
     """
     try:
         forge = PromptForge.from_yaml(params_file)
@@ -163,10 +163,10 @@ def add(params_file, key, value):
         except json.JSONDecodeError:
             parsed_value = value
         
-        forge.add(key, parsed_value)
-        forge.save(params_file)
+        smith.add(key, parsed_value)
+        smith.save(params_file)
         
-        click.echo(f"{Fore.GREEN}✓ Parámetro agregado: {Fore.YELLOW}{key} {Fore.WHITE}= {parsed_value}")
+        click.echo(f"{Fore.GREEN}✓ Parameter added: {Fore.YELLOW}{key} {Fore.WHITE}= {parsed_value}")
         
     except Exception as e:
         click.echo(f"{Fore.RED}Error: {str(e)}", err=True)
@@ -178,22 +178,22 @@ def add(params_file, key, value):
 @click.argument('key')
 def remove(params_file, key):
     """
-    Eliminar un parámetro del archivo YAML.
+    Remove a parameter from the YAML file.
     
-    Ejemplo:
-        prompt-forge remove params.yaml old_param
+    Example:
+        promptsmith remove params.yaml old_param
     """
     try:
-        forge = PromptForge.from_yaml(params_file)
+        smith = PromptSmith.from_yaml(params_file)
         
-        if key not in forge:
-            click.echo(f"{Fore.YELLOW}⚠ Parámetro '{key}' no existe")
+        if key not in smith:
+            click.echo(f"{Fore.YELLOW}⚠ Parameter '{key}' does not exist")
             return
         
-        forge.remove(key)
-        forge.save(params_file)
+        smith.remove(key)
+        smith.save(params_file)
         
-        click.echo(f"{Fore.GREEN}✓ Parámetro eliminado: {key}")
+        click.echo(f"{Fore.GREEN}✓ Parameter removed: {key}")
         
     except Exception as e:
         click.echo(f"{Fore.RED}Error: {str(e)}", err=True)
@@ -205,17 +205,17 @@ def remove(params_file, key):
 @click.argument('key')
 def get(params_file, key):
     """
-    Obtener el valor de un parámetro específico.
+    Get the value of a specific parameter.
     
-    Ejemplo:
-        prompt-forge get params.yaml name
+    Example:
+        promptsmith get params.yaml name
     """
     try:
-        forge = PromptForge.from_yaml(params_file)
-        value = forge.get(key)
+        smith = PromptSmith.from_yaml(params_file)
+        value = smith.get(key)
         
         if value is None:
-            click.echo(f"{Fore.YELLOW}⚠ Parámetro '{key}' no encontrado")
+            click.echo(f"{Fore.YELLOW}⚠ Parameter '{key}' not found")
         else:
             click.echo(f"{Fore.YELLOW}{key}: {Fore.WHITE}{value}")
             
@@ -229,21 +229,21 @@ def get(params_file, key):
 @click.argument('source_file', type=click.Path(exists=True))
 def merge(target_file, source_file):
     """
-    Combinar parámetros de dos archivos YAML.
+    Merge parameters from two YAML files.
     
-    Ejemplo:
-        prompt-forge merge params.yaml additional_params.yaml
+    Example:
+        promptsmith merge params.yaml additional_params.yaml
     """
     try:
-        forge = ParamForge.from_yaml(target_file)
-        initial_count = len(forge)
+        smith = PromptSmith.from_yaml(target_file)
+        initial_count = len(smith)
         
-        forge.merge_yaml(source_file)
-        forge.save(target_file)
+        smith.merge_yaml(source_file)
+        smith.save(target_file)
         
-        new_count = len(forge) - initial_count
-        click.echo(f"{Fore.GREEN}✓ Archivos combinados")
-        click.echo(f"{Fore.CYAN}Nuevos parámetros agregados: {new_count}")
+        new_count = len(smith) - initial_count
+        click.echo(f"{Fore.GREEN}✓ Files merged")
+        click.echo(f"{Fore.CYAN}New parameters added: {new_count}")
         
     except Exception as e:
         click.echo(f"{Fore.RED}Error: {str(e)}", err=True)

@@ -1,19 +1,19 @@
 """
-Ejemplos avanzados de ParamForge para casos de uso reales.
+Advanced examples of PromptSmith for real use cases.
 """
 
-from paramforge import ParamForge
+from promptsmith import PromptSmith
 
 print("=" * 70)
-print("ParamForge ⚡ - Ejemplos Avanzados")
+print("PromptSmith ⚡ - Advanced Examples")
 print("=" * 70)
 print()
 
-# Ejemplo 1: Email Profesional
-print("Ejemplo 1: Generador de Emails Profesionales")
+# Example 1: Professional Email
+print("Example 1: Professional Email Generator")
 print("-" * 70)
 
-email_params = ParamForge({
+email_params = PromptSmith({
     'sender_name': 'María García',
     'sender_role': 'Product Manager',
     'sender_email': 'maria@techstart.com',
@@ -46,11 +46,11 @@ result = email_params.render(email_template)
 print(result)
 print("\n")
 
-# Ejemplo 2: Perfil Profesional
-print("Ejemplo 2: Generador de Perfil Profesional")
+# Example 2: Professional Profile
+print("Example 2: Professional Profile Generator")
 print("-" * 70)
 
-profile_params = ParamForge({
+profile_params = PromptSmith({
     'name': 'Alex Johnson',
     'title': 'Full Stack Developer',
     'experience_years': 7,
@@ -79,11 +79,11 @@ result = profile_params.render(profile_template)
 print(result)
 print("\n")
 
-# Ejemplo 3: Reporte de Proyecto
-print("Ejemplo 3: Reporte de Estado de Proyecto")
+# Example 3: Project Report
+print("Example 3: Project Status Report")
 print("-" * 70)
 
-project_params = ParamForge({
+project_params = PromptSmith({
     'project': 'E-Commerce Platform',
     'sprint': 'Sprint 12',
     'manager': 'Sarah Chen',
@@ -139,11 +139,11 @@ result = project_params.render(report_template)
 print(result)
 print("\n")
 
-# Ejemplo 4: Code Review Request
-print("Ejemplo 4: Solicitud de Code Review")
+# Example 4: Code Review Request
+print("Example 4: Code Review Request")
 print("-" * 70)
 
-review_params = ParamForge({
+review_params = PromptSmith({
     'developer': 'Carlos Ruiz',
     'reviewer': 'Tech Lead',
     'feature': 'User Authentication',
@@ -176,11 +176,11 @@ result = review_params.render(review_template)
 print(result)
 print("\n")
 
-# Ejemplo 5: Análisis de Datos
-print("Ejemplo 5: Template de Análisis de Datos")
+# Example 5: Data Analysis
+print("Example 5: Data Analysis Template")
 print("-" * 70)
 
-analysis_params = ParamForge({
+analysis_params = PromptSmith({
     'analyst': 'Dr. Lisa Wang',
     'dataset': 'Customer Behavior Q1 2026',
     'records': 150000,
@@ -219,15 +219,15 @@ result = analysis_params.render(analysis_template)
 print(result)
 print("\n")
 
-# Ejemplo 6: Merge de múltiples contextos
-print("Ejemplo 6: Combinar Contextos")
+# Example 6: Merge multiple contexts
+print("Example 6: Combine Contexts")
 print("-" * 70)
 
 try:
-    # Cargar parámetros personales
-    personal = ParamForge.from_yaml("examples/params.yaml")
+    # Load personal parameters
+    personal = PromptSmith.from_yaml("examples/params.yaml")
     
-    # Combinar con parámetros de trabajo
+    # Merge with work parameters
     personal.merge_yaml("examples/work_params.yaml")
     
     combined_template = """
@@ -246,9 +246,9 @@ Location: {{work_location}}
     print(result)
     
 except FileNotFoundError:
-    print("Archivos YAML no encontrados. Ejecuta desde la raíz del proyecto.")
+    print("YAML files not found. Run from project root.")
 
 print("\n")
 print("=" * 70)
-print("¡Ejemplos avanzados completados!")
+print("Advanced examples completed!")
 print("=" * 70)

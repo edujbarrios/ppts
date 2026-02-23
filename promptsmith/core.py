@@ -1,5 +1,5 @@
 """
-Core engine for ParamForge - Simple YAML-based parameter management for prompts.
+Core engine for PromptSmith - Simple YAML-based parameter management for prompts.
 """
 
 import os
@@ -9,7 +9,7 @@ from jinja2 import Environment, Template, exceptions
 import yaml
 
 
-class ParamForge:
+class PromptSmith:
     """
     Manage parameters from YAML files and render prompts with them.
     
@@ -39,10 +39,10 @@ class ParamForge:
             filepath: Path to YAML file
             
         Returns:
-            ParamForge instance with loaded parameters
+            PromptSmith instance with loaded parameters
             
         Example:
-            forge = ParamForge.from_yaml("params.yaml")
+            smith = PromptSmith.from_yaml("params.yaml")
         """
         with open(filepath, 'r', encoding='utf-8') as f:
             params = yaml.safe_load(f) or {}
@@ -57,10 +57,10 @@ class ParamForge:
             filepath: Path where to create the YAML file
             
         Returns:
-            ParamForge instance
+            PromptSmith instance
             
         Example:
-            forge = ParamForge.create_default("my_params.yaml")
+            smith = PromptSmith.create_default("my_params.yaml")
         """
         default_params = {
             'name': 'Your Name',
@@ -72,7 +72,7 @@ class ParamForge:
         
         # Save to file
         with open(filepath, 'w', encoding='utf-8') as f:
-            f.write("# ParamForge Parameters\n")
+            f.write("# PromptSmith Parameters\n")
             f.write(f"# Created: {filepath}\n")
             f.write("# Edit this file to add your own parameters\n\n")
             yaml.dump(default_params, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
@@ -91,7 +91,7 @@ class ParamForge:
             Rendered prompt string
             
         Example:
-            result = forge.render("Hello {{name}}!")
+            result = smith.render("Hello {{name}}!")
         """
         # Merge loaded params with any extra params
         final_params = {**self.params, **extra_params}
@@ -114,7 +114,7 @@ class ParamForge:
             Rendered prompt string
             
         Example:
-            result = forge.render_file("my_prompt.txt")
+            result = smith.render_file("my_prompt.txt")
         """
         with open(prompt_file, 'r', encoding='utf-8') as f:
             prompt = f.read()
@@ -129,7 +129,7 @@ class ParamForge:
             value: Parameter value
             
         Example:
-            forge.add("department", "Engineering")
+            smith.add("department", "Engineering")
         """
         self.params[key] = value
     
@@ -145,7 +145,7 @@ class ParamForge:
             Parameter value or default
             
         Example:
-            name = forge.get("name")
+            name = smith.get("name")
         """
         return self.params.get(key, default)
     
@@ -157,7 +157,7 @@ class ParamForge:
             key: Parameter name
             
         Example:
-            forge.remove("old_param")
+            smith.remove("old_param")
         """
         if key in self.params:
             del self.params[key]
@@ -170,7 +170,7 @@ class ParamForge:
             Dictionary of all parameters
             
         Example:
-            all_params = forge.list_params()
+            all_params = smith.list_params()
         """
         return self.params.copy()
     
@@ -183,11 +183,11 @@ class ParamForge:
             include_comments: Whether to include header comments
             
         Example:
-            forge.save("updated_params.yaml")
+            smith.save("updated_params.yaml")
         """
         with open(filepath, 'w', encoding='utf-8') as f:
             if include_comments:
-                f.write("# ParamForge Parameters\n")
+                f.write("# PromptSmith Parameters\n")
                 f.write(f"# File: {filepath}\n\n")
             yaml.dump(self.params, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
     
@@ -199,7 +199,7 @@ class ParamForge:
             filepath: Path to YAML file to merge
             
         Example:
-            forge.merge_yaml("additional_params.yaml")
+            smith.merge_yaml("additional_params.yaml")
         """
         with open(filepath, 'r', encoding='utf-8') as f:
             new_params = yaml.safe_load(f) or {}
@@ -215,9 +215,9 @@ class ParamForge:
     
     def __repr__(self) -> str:
         """String representation."""
-        return f"ParamForge(parameters={len(self.params)})"
+        return f"PromptSmith(parameters={len(self.params)})"
     
     def __str__(self) -> str:
         """User-friendly string representation."""
         param_list = ", ".join(self.params.keys())
-        return f"ParamForge with {len(self.params)} parameters: {param_list}"
+        return f"PromptSmith with {len(self.params)} parameters: {param_list}"

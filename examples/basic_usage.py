@@ -1,31 +1,31 @@
 """
-Ejemplos básicos de uso de ParamForge.
+Basic usage examples of PromptSmith.
 """
 
-from paramforge import ParamForge
+from promptsmith import PromptSmith
 
 print("=" * 70)
-print("ParamForge ⚡ - Ejemplos de Uso")
+print("PromptSmith ⚡ - Usage Examples")
 print("=" * 70)
 print()
 
-# Ejemplo 1: Crear y usar parámetros básicos
-print("Ejemplo 1: Parámetros Básicos")
+# Example 1: Create and use basic parameters
+print("Example 1: Basic Parameters")
 print("-" * 70)
 
-forge = ParamForge({
+smith = PromptSmith({
     'name': 'Alice',
     'role': 'Developer',
     'company': 'TechCorp'
 })
 
 prompt = "Hello {{name}}! You work as a {{role}} at {{company}}."
-result = forge.render(prompt)
+result = smith.render(prompt)
 print(result)
 print()
 
-# Ejemplo 2: Cargar desde archivo YAML
-print("Ejemplo 2: Cargar desde YAML")
+# Example 2: Load from YAML file
+print("Example 2: Load from YAML")
 print("-" * 70)
 
 try:
@@ -41,31 +41,31 @@ Best regards,
 HR Team
     """.strip()
     
-    result = forge.render(prompt)
+    result = smith.render(prompt)
     print(result)
     print()
 except FileNotFoundError:
-    print("Archivo params.yaml no encontrado. Ejecuta desde la raíz del proyecto.")
+    print("params.yaml file not found. Run from project root.")
     print()
 
-# Ejemplo 3: Agregar parámetros dinámicamente
-print("Ejemplo 3: Agregar Parámetros")
+# Example 3: Add parameters dynamically
+print("Example 3: Add Parameters")
 print("-" * 70)
 
-forge = ParamForge({'name': 'Bob'})
-print(f"Parámetros iniciales: {forge.list_params()}")
+smith = PromptSmith({'name': 'Bob'})
+print(f"Initial parameters: {smith.list_params()}")
 
-forge.add('email', 'bob@example.com')
-forge.add('city', 'New York')
+smith.add('email', 'bob@example.com')
+smith.add('city', 'New York')
 
-print(f"Después de agregar: {forge.list_params()}")
+print(f"After adding: {smith.list_params()}")
 print()
 
-# Ejemplo 4: Prompts con listas
-print("Ejemplo 4: Usando Listas")
+# Example 4: Prompts with lists
+print("Example 4: Using Lists")
 print("-" * 70)
 
-forge = ParamForge({
+smith = PromptSmith({
     'name': 'Carol',
     'skills': ['Python', 'JavaScript', 'Docker', 'Kubernetes']
 })
@@ -83,11 +83,11 @@ result = forge.render(prompt)
 print(result)
 print()
 
-# Ejemplo 5: Prompts con condicionales
-print("Ejemplo 5: Condicionales")
+# Example 5: Prompts with conditionals
+print("Example 5: Conditionals")
 print("-" * 70)
 
-forge = ParamForge({
+smith = PromptSmith({
     'name': 'David',
     'experience_years': 8,
     'language': 'Python'
@@ -108,52 +108,52 @@ result = forge.render(prompt)
 print(result)
 print()
 
-# Ejemplo 6: Parámetros extra en render
-print("Ejemplo 6: Parámetros Extra")
+# Example 6: Extra parameters in render
+print("Example 6: Extra Parameters")
 print("-" * 70)
 
-forge = ParamForge({'name': 'Elena'})
+smith = PromptSmith({'name': 'Elena'})
 
-# Parámetros del YAML + parámetros extra
-result = forge.render(
+# YAML parameters + extra parameters
+result = smith.render(
     "Hello {{name}} from {{city}}!",
-    city="Paris"  # Parámetro extra
+    city="Paris"  # Extra parameter
 )
 print(result)
 print()
 
-# Ejemplo 7: Guardar parámetros
-print("Ejemplo 7: Guardar a YAML")
+# Example 7: Save parameters
+print("Example 7: Save to YAML")
 print("-" * 70)
 
-forge = ParamForge({
+smith = PromptSmith({
     'name': 'Frank',
     'email': 'frank@example.com',
     'role': 'Data Scientist',
     'tools': ['Python', 'TensorFlow', 'PyTorch']
 })
 
-forge.save('my_params.yaml')
-print("✓ Parámetros guardados en my_params.yaml")
+smith.save('my_params.yaml')
+print("✓ Parameters saved to my_params.yaml")
 print()
 
-# Ejemplo 8: Información del forge
-print("Ejemplo 8: Información")
+# Example 8: Forge information
+print("Example 8: Information")
 print("-" * 70)
 
-forge = ParamForge({
+smith = PromptSmith({
     'param1': 'value1',
     'param2': 'value2',
     'param3': 'value3'
 })
 
-print(f"Representación: {repr(forge)}")
-print(f"String: {str(forge)}")
-print(f"Número de parámetros: {len(forge)}")
-print(f"¿Contiene 'param1'? {'param1' in forge}")
-print(f"¿Contiene 'param99'? {'param99' in forge}")
+print(f"Representation: {repr(smith)}")
+print(f"String: {str(smith)}")
+print(f"Number of parameters: {len(smith)}")
+print(f"Contains 'param1'? {'param1' in smith}")
+print(f"Contains 'param99'? {'param99' in smith}")
 print()
 
 print("=" * 70)
-print("¡Ejemplos completados!")
+print("Examples completed!")
 print("=" * 70)

@@ -1,58 +1,58 @@
 """
-Ejemplo CLI: Cómo usar PromptForge desde la línea de comandos.
+Example CLI: How to use PromptSmith from the command line.
 """
 
 print("""
 =====================================================================
-   ParamForge ⚡ - Guía de Uso del CLI
+   PromptSmith ⚡ - CLI Usage Guide
 =====================================================================
 
-1. CREAR UN ARCHIVO DE PARÁMETROS
-   --------------------------------
+1. CREATE A PARAMETERS FILE
+   -------------------------
    
-   Interactivo:
-   $ python -m paramforge init my_params.yaml
+   Interactive:
+   $ python -m promptsmith init my_params.yaml
    
-   Se te pedirá ingresar información básica.
+   You'll be prompted to enter basic information.
 
 
-2. VER PARÁMETROS
+2. VIEW PARAMETERS
+   ---------------
+   
+   $ python -m promptsmith show my_params.yaml
+   
+   Shows all parameters and their values.
+
+
+3. ADD PARAMETERS
    --------------
    
-   $ python -m paramforge show my_params.yaml
+   $ python -m promptsmith add my_params.yaml --key department --value Engineering
+   $ python -m promptsmith add my_params.yaml -k city -v "San Francisco"
    
-   Muestra todos los parámetros y sus valores.
+   Adds or updates a parameter.
 
 
-3. AGREGAR PARÁMETROS
-   ------------------
+4. REMOVE PARAMETERS
+   -----------------
    
-   $ python -m paramforge add my_params.yaml --key department --value Engineering
-   $ python -m paramforge add my_params.yaml -k city -v "San Francisco"
+   $ python -m promptsmith remove my_params.yaml old_param
    
-   Agrega o actualiza un parámetro.
+   Removes a parameter from the file.
 
 
-4. ELIMINAR PARÁMETROS
-   -------------------
+5. GET A PARAMETER
+   ---------------
    
-   $ python -m paramforge remove my_params.yaml old_param
+   $ python -m promptsmith get my_params.yaml name
    
-   Elimina un parámetro del archivo.
+   Shows the value of a specific parameter.
 
 
-5. OBTENER UN PARÁMETRO
-   --------------------
+6. RENDER A PROMPT
+   ---------------
    
-   $ python -m paramforge get my_params.yaml name
-   
-   Muestra el valor de un parámetro específico.
-
-
-6. RENDERIZAR UN PROMPT
-   --------------------
-   
-   Crea un archivo de prompt (ej: email.txt):
+   Create a prompt file (e.g., email.txt):
    
    Subject: Meeting Request
    
@@ -65,46 +65,46 @@ print("""
    {{sender_name}}
    
    
-   Luego renderiza:
-   $ python -m paramforge render email.txt my_params.yaml
+   Then render:
+   $ python -m promptsmith render email.txt my_params.yaml
    
-   Con parámetros extra:
-   $ python -m paramforge render email.txt my_params.yaml -p sender_name="Maria" -p project="AI Platform"
+   With extra parameters:
+   $ python -m promptsmith render email.txt my_params.yaml -p sender_name="Maria" -p project="AI Platform"
    
-   Guardar resultado:
-   $ python -m paramforge render email.txt my_params.yaml -o output.txt
+   Save output:
+   $ python -m promptsmith render email.txt my_params.yaml -o output.txt
 
 
-7. COMBIMAR ARCHIVOS YAML
-   -----------------------
+7. MERGE YAML FILES
+   ----------------
    
-   $ python -m paramforge merge target.yaml source.yaml
+   $ python -m promptsmith merge target.yaml source.yaml
    
-   Combina los parámetros de source.yaml en target.yaml
+   Merges parameters from source.yaml into target.yaml
 
 
-EJEMPLOS PRÁCTICOS:
+PRACTICAL EXAMPLES:
 ===================
 
-# Crear parámetros de trabajo
-$ python -m paramforge init work.yaml
+# Create work parameters
+$ python -m promptsmith init work.yaml
 
-# Agregar información del proyecto
-$ python -m paramforge add work.yaml -k project -v "E-Commerce Platform"
-$ python -m paramforge add work.yaml -k status -v "In Progress"
+# Add project information
+$ python -m promptsmith add work.yaml -k project -v "E-Commerce Platform"
+$ python -m promptsmith add work.yaml -k status -v "In Progress"
 
-# Ver todos los parámetros
-$ python -m paramforge show work.yaml
+# View all parameters
+$ python -m promptsmith show work.yaml
 
-# Usar en un prompt
+# Use in a prompt
 $ echo "Project: {{project}} - Status: {{status}}" > status.txt
-$ python -m paramforge render status.txt work.yaml
+$ python -m promptsmith render status.txt work.yaml
 
-# Guardar resultado
-$ python -m paramforge render status.txt work.yaml -o report.txt
+# Save output
+$ python -m promptsmith render status.txt work.yaml -o report.txt
 
 =====================================================================
-Tip: Puedes editar los archivos YAML directamente con cualquier
-     editor de texto. ¡Son solo archivos de texto!
+Tip: You can edit YAML files directly with any text editor.
+     They're just text files!
 ====================================================================
 """)
