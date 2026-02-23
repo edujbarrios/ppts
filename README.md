@@ -1,8 +1,6 @@
 # PPTS 
 
-**Prompt Parametrizer and Template Structurer**
-
-Craft reusable prompts with simple YAML parameters.
+*Craft reusable prompts with simple YAML parameters.*
 
 ## What is PPTS?
 
@@ -161,7 +159,7 @@ If you find this repository and tool useful in your research or project, feel fr
 ```bibtex
 @software{barrios2026ppts,
   author = {Barrios, Eduardo J.},
-  title = {PPTS: Prompt Parametrized and Template Structurer},
+  title = {PPTS: Prompt Parametrizer and Template Structurer},
   year = {2026},
   url = {https://github.com/edujbarrios/ppts},
   note = {A minimalist tool for parametrizing AI prompts with YAML}
