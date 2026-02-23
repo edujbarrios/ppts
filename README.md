@@ -1,4 +1,4 @@
-# PPTS ⚡
+# PPTS 
 
 **Prompt Parametrizer and Template Structurer**
 
@@ -18,23 +18,39 @@ Structure your prompts with reusable parameters - you provide the YAML configura
 - 🛠️ **Intuitive CLI**: Simple command-line interface
 - 💾 **Multiple Contexts**: Create different YAML files for different projects or contexts
 
+## Project Structure
+
+```
+ppts/
+├── ppts/                  # Main package
+│   ├── __init__.py
+│   ├── core.py            # PPTS class & rendering engine
+│   ├── cli.py             # Command-line interface
+│   └── __main__.py        # Entry point
+├── yaml_params/           # Your YAML configuration files
+│   └── params.yaml        # Example AI prompt configuration
+├── README.md
+└── requirements.txt
+```
+
 ## Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ppts.git
+git clone https://github.com/edujbarrios/ppts.git
 cd ppts
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Install the tool (development mode)
-pip install -e .
 ```
 
-Now you can use `ppts` command anywhere:
+You can now use the tool directly:
 ```bash
-ppts --help
+# Using Python module
+python -m ppts --help
+
+# View example configuration
+python -m ppts show yaml_params/params.yaml
 ```
 
 ## Quick Start
@@ -131,78 +147,6 @@ python -m ppts add yaml_params/params.yaml -k department -v Engineering
 python -m ppts init yaml_params/my_params.yaml
 ```
 
-## Usage Examples
-
-### Example 1: Code Analysis Prompt
-
-```yaml
-# yaml_params/params.yaml
-role: expert Python developer
-task: code review
-code_type: REST API endpoint
-focus: security and performance
-output_sections:
-  - Security Issues
-  - Performance Bottlenecks
-  - Best Practice Violations
-  - Suggested Improvements
-```
-
-```python
-from ppts import PPTS
-
-params = PPTS.from_yaml("yaml_params/params.yaml")
-
-prompt_template = """
-You are a {{role}}.
-
-Analyze this {{code_type}} focusing on {{focus}}.
-
-Provide your analysis in these sections:
-{% for section in output_sections %}
-## {{section}}
-{% endfor %}
-"""
-
-result = params.render(prompt_template)
-# Send to your LLM API
-```
-
-### Example 2: Content Generation Prompt
-
-```yaml
-# modify yaml_params/params.yaml with:
-role: technical writer
-task: create tutorial
-topic: Docker containerization
-audience: beginner developers
-style: step-by-step with examples
-max_length: 1500 words
-include:
-  - Prerequisites
-  - Code examples
-  - Common pitfalls
-  - Best practices
-```
-
-```python
-params = PPTS.from_yaml("yaml_params/params.yaml")
-
-prompt = """
-As a {{role}}, {{task}} about {{topic}} for {{audience}}.
-
-Style: {{style}}
-Max length: {{max_length}}
-
-Include:
-{% for item in include %}
-- {{item}}
-{% endfor %}
-"""
-
-result = params.render(prompt)
-```
-
 ## API
 
 ### PPTS Class
@@ -244,10 +188,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - ✅ **No Complexity**: No predefined templates, no complex configuration
 - ✅ **Structured Approach**: Parametrized prompts with template structuring
 
-## License
-
-MIT License - Do whatever you want with this.
-
 ## Citation
 
 If you find this repository and tool useful in your research or project, feel free to cite it as:
@@ -257,7 +197,7 @@ If you find this repository and tool useful in your research or project, feel fr
   author = {Barrios, Eduardo J.},
   title = {PPTS: Prompt Parametrized and Template Structurer},
   year = {2026},
-  url = {https://github.com/yourusername/ppts},
+  url = {https://github.com/edujbarrios/ppts},
   note = {A minimalist tool for parametrizing AI prompts with YAML}
 }
 ```
@@ -265,7 +205,7 @@ If you find this repository and tool useful in your research or project, feel fr
 **APA Format:**
 ```
 Barrios, Eduardo J. (2026). PPTS: Prompt Parametrized and Template Structurer. 
-GitHub repository. https://github.com/yourusername/ppts
+GitHub repository. https://github.com/edujbarrios/ppts
 ```
 
 ---
