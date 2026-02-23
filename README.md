@@ -21,7 +21,20 @@ Structure your prompts with reusable parameters - you provide the YAML configura
 ## Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/ppts.git
+cd ppts
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Install the tool (development mode)
+pip install -e .
+```
+
+Now you can use `ppts` command anywhere:
+```bash
+ppts --help
 ```
 
 ## Quick Start
@@ -231,8 +244,32 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - ✅ **No Complexity**: No predefined templates, no complex configuration
 - ✅ **Structured Approach**: Parametrized prompts with template structuring
 
+## License
+
+MIT License - Do whatever you want with this.
+
+## Citation
+
+If you find this repository and tool useful in your research or project, feel free to cite it as:
+
+```bibtex
+@software{barrios2026ppts,
+  author = {Barrios, Eduardo J.},
+  title = {PPTS: Prompt Parametrized and Template Structurer},
+  year = {2026},
+  url = {https://github.com/yourusername/ppts},
+  note = {A minimalist tool for parametrizing AI prompts with YAML}
+}
+```
+
+**APA Format:**
+```
+Barrios, Eduardo J. (2026). PPTS: Prompt Parametrized and Template Structurer. 
+GitHub repository. https://github.com/yourusername/ppts
+```
+
 ---
 
- # Author
+## Author
 
 [Eduardo J. Barrios](https://edujbarrios.com)
